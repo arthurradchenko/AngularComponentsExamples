@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h3>{{post.title}},
+    <span class="map">
+      <i class="icon ion-md-pin"></i>
+      <letter-color [size]="13" [word]="post.location.city"></letter-color> <span class="date">{{post.createdAt | date:
+        'dd.MM.yy' }}</span>
+    </span>
+  </h3>
+  <div class="category">
+    Категории:
+    <div *ngFor="let cat of post.category">{{cat.title}}</div>
+  </div>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body description">
+  <p>{{post.description}}</p>
+</div>
+<!--<hr>-->
+<!--<label>Чтоб отправить заявку на выполнение заказа, напишите Ваш комментарий*</label>-->
+<!--<textarea [(ngModel)]="textarea"></textarea>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" (click)="push()" [disabled]="!textarea">Отправить заявку</button>-->
+<!--</div>-->

@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="input-header col-md-11">
+      <h3><span>Р</span>едактирование объявления</h3>
+    </div>
+    <button type="button" class="close col-md-1" aria-label="Close" (click)="activeModal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="row">
+    <div class="inputs">
+      <form class="postEditingForm" [formGroup]="postEditingForm" novalidate (ngSubmit)="editPost()">
+        <div class="form-group padding-left">
+          <label>Заголовок объявления<input class="form-control" name="title" formControlName="title" [value]="post.title" /></label>
+        </div>
+        <div class="form-group padding-left">
+          <div class="row">
+            <label>Выберите категории : </label>
+          </div>
+          <div class="row">
+            <div class="categoryList">
+              <div *ngFor="let category of selectedlistOfCategories" (click)="removeCategory($event)">{{category}}<i
+                  class="icon ion-md-close"></i></div>
+            </div>
+          </div>
+          <select name="categoryId" #selection formControlName="categoryId" class="form-control" (change)="multiplyCategory($event, selection.options[selection.options.selectedIndex].text)">
+            <option *ngFor="let category of categories" [ngValue]="category.id">{{category.title}}</option>
+          </select>
+        </div>
+        <div class="form-group padding-left description">
+          <div class="row">
+            <label>Описание работы и требования </label>
+          </div>
+          <div class="row">
+            <textarea formControlName="description"></textarea>
+          </div>
+        </div>
+        <div class="horizontal">
+          <div class="form-group">
+            <label>Локация</label>
+            <select class="form-control" name="location" formControlName="city" [(ngModel)]="locSelected">
+              <option *ngFor="let location of locations" [value]="location.id">{{location.city}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Цена</label>
+            <input class="form-control" name="price" formControlName="price" />
+            <span>грн</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-3">
+            <button mat-raised-button (click)="editPost()">Редактировать обьявление</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

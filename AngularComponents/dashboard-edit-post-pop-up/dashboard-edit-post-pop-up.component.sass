@@ -1,0 +1,144 @@
+//imports
+@import '../../../sass-utilities/_variables.sass'
+@import '../../../sass-utilities/_animations.sass'
+//
+
+select.form-control
+    padding: 0
+    &:focus
+      outline: none !important
+      box-shadow: none !important
+      border: 1px solid #ced4da
+.container-fluid
+    .row
+        margin: 0
+        padding-left: 10px
+        width: 480px
+
+        .input-header
+            padding-top: 5px
+            h3
+                color: $grey
+                font-weight: 100
+                font-size: 20px
+                margin: 20px 24px
+                margin-bottom: 17px
+                span
+                    color: $blue
+        .inputs
+            .form-group.padding-left
+                padding: 10px
+                width: 450px
+                input
+                    width: 450px
+                    input.form-control, select.form-control
+                        padding-right: 10px
+                        width: 450px
+                        height: 26px
+                        border-radius: 0
+                        outline: none !important
+                .categoryList
+                    padding-bottom: 5px
+                    padding-top: -20px
+                    div
+                        margin: 0
+                        margin-right: 9px
+                        margin-top: 4px
+                        position: relative
+                        font-weight: 100
+                        color: #f3f3f3
+                        background-color: #3D5AFF
+                        padding: 3px 5px
+                        padding-right: 15px
+                        font-size: 11px
+                        display: inline-block
+                        cursor: pointer
+                        animation: .5s fadeIn
+                        transition : all .5s
+                        i.icon.ion-md-close
+                            position: absolute
+                            width: 0
+                            right: 11px
+                            top: 3.6px
+                            pointer-events: none
+            .form-group.padding-left.description
+                .row
+                    paddig-left: 10px
+                    padding-right: 10px
+                    width: 450px
+                    textarea
+                        outline: none !important
+                        color: #697384
+                        border-color: $grey-disabled
+                        font-size: 13px
+                        margin-top: 5px
+                        padding: 5px 7px
+                        height: 75px
+                        width: 100%
+                        resize: none
+            .horizontal
+                display: flex
+                margin-top: 30px
+                padding-left: 15px
+                .form-group
+                    position: relative
+                    width: 20%
+                    margin-top: 0
+                    input
+                        font-size: 13px
+                    &:first-child
+                        margin-right: 185px
+                    span
+                        position: absolute
+                        right: -24px
+                        top: 30px
+                        font-size: 13px
+button.mat-raised-button
+    color: white
+    background-color: $blue
+    font-size: 14px
+    letter-spacing: 0.2px
+    font-weight: 600
+    padding: 0
+    padding-right: 4px
+    border-radius: 3px
+    padding-left: 4px
+.close
+    padding-right: 10px
+                                         
+
+
+
+
+
+@media only screen and (min-width : 992px) and (max-width : 1200px)
+    .post-edit-form
+        width: 100%
+        margin-left: 0
+        .form-inputs
+            .inputs
+                .post-input
+                    .form-group
+                        margin-bottom: 22px
+                    .horizontal
+                        .form-group
+                            width: 30%
+                        &:first-child
+                            margin-right: 93px
+    .form-tips
+        .hints
+            padding: 16px
+            padding-top: 76px
+            p
+                font-size: 13px
+                margin-bottom: 19px
+                &:last-child
+                    margin-top: 28px
+    .form-group
+        margin-top: 51px
+        padding: 0 10px
+        button.mat-raised-button
+            white-space: unset
+            font-size: 12px
+            line-height: 13px
+            padding: 10px 3px

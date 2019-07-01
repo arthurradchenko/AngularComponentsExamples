@@ -1,0 +1,26 @@
+
+<div class="modal-header">
+    <h3>{{post.title}}, <span class="map">
+                   <i class="icon ion-md-pin"></i>
+        <!--</span>-->
+        <!--<span class="city">-->
+                   <letter-color [size]="13" [word]="post.location.city"></letter-color> <span class="date">{{post.createdAt | date: 'dd.MM.yy' }}</span>
+                 </span></h3>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body description">
+    <p>{{post.description}}</p>
+  
+    <br>
+    <label *ngIf="user?.id !== post?.request.userId && user">Чтоб отправить заявку на выполнение заказа, напишите Ваш комментарий*</label>
+    <textarea *ngIf="user?.id !== post?.request.userId && user" [(ngModel)]="textarea"></textarea>
+
+</div>
+<div class="modal-footer">
+    <h3 *ngIf="user?.id === post?.request.userId">Ваша заявка успешно отправлена</h3>
+    <button *ngIf="user?.id !== post?.request.userId && user" type="button" type="submit" (click)="push()" [disabled]="!textarea">Отправить заявку</button>
+    <p *ngIf="!user">Чтобы отправить заявку нужно зарегистрироваться</p>
+    <button *ngIf="!user" type="button" (click)="register()">Зарегистрироваться</button>
+</div>

@@ -1,0 +1,118 @@
+<section class="form-wrapper"  [ngClass]="{'longer': !stepOne}">
+      <h1><letter-color word="Регистрация"></letter-color></h1>
+      <small>Заполните следующие поля:</small>
+
+      <form class="registration-form" [formGroup]="registrationForm" novalidate >
+        <div class="form-group" [ngClass]="{'hidden': stepOne}">
+          <label for="name">Имя</label>
+          <input type="text" id="name" placeholder="Денис"[ngClass]="{inputError: registrationForm.controls['name'].invalid && registrationForm.controls['name'].touched}" formControlName="name">
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="registrationForm.controls['name'].invalid && registrationForm.controls['name'].touched">
+                    Отсутствует или некоректное имя
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'hidden': stepOne}">
+          <label for="lastName">Фамилия</label>
+          <input type="text" id="lastName" placeholder="Павлючик"[ngClass]="{inputError: registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched}"  formControlName="lastName"/>
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
+                    Отсутствует или некоректная фамилия
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'hidden': !stepOne}">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="denis@ukr.com"[ngClass]="{inputError: registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched}"  formControlName="email">
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched">
+                    Некоректен или отсутствует email
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group" [ngClass]="{'hidden': !stepOne}">
+          <label for="tel">Телефон</label>
+          <input type="tel" id="tel" placeholder="380672202222"[ngClass]="{inputError: registrationForm.controls['tel'].invalid && registrationForm.controls['tel'].touched}"  formControlName="tel" formControlName="tel">
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="registrationForm.controls['tel'].invalid && registrationForm.controls['tel'].touched">
+                    Отсутствует или некоректный телефон
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'hidden': !stepOne}">
+          <label for="password">Пароль</label>
+          <input type="password" id="password" placeholder="Пароль"[ngClass]="{inputError: registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched}"  formControlName="password" formControlName="password">
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+                    Пароль должен быть от 10 символов и содержать хотя бы 1 цифру
+                </div>
+            </div>
+        </div>
+        <div class="form-group cat" [ngClass]="{'hidden': !stepOne}">
+            <label>Выберите категории : </label>
+              <div class="categoryList">
+                 <div *ngFor="let category of selectedlistOfCategories" (click)="removeCategory($event)">{{category}}<i class="icon ion-md-close"></i></div>
+              </div>
+            <select  name="categoryId" #selection formControlName="categoryId" class="form-control" (change)="multiplyCategory($event, selection.options[selection.options.selectedIndex].text)">
+                <option *ngFor="let category of categories" [ngValue]="category.id">{{category.title}}</option>
+            </select>
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="(catString == null || catString == '') && registrationForm.controls['categoryId'].touched">
+                    Нужно выбрать хотя бы одну категорию
+                </div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'hidden': stepOne}">
+            <label>Локация</label>
+            <select class="form-control" name="location" formControlName="city" >
+                <option *ngFor="let location of locations" [value]="location.id">{{location.city}}</option>
+            </select>
+            <div class="alert-wrapper">
+                <div class="alert alert-danger"
+                     *ngIf="registrationForm.controls['city'].invalid && registrationForm.controls['city'].touched">
+                    Надо выбрать город
+                </div>
+            </div>
+        </div>
+        <!---->
+        <div class="form-group photos" [ngClass]="{'hidden': stepOne}">
+         <label>Ваше фото : </label>
+         <div class="fileblocks">
+           <div class="file_upload">
+                           <button mat-raised-button  (click)="fileUpload2.click()"><p>Добавить<br/> файлы</p> <i class="icon ion-md-camera"></i></button>
+                           <!-- <input  class="fakeinput form-control" name="photo"  [(ngModel)]="photoName2"/> -->
+                           <input #fileUpload2 type='file' name="fileUpload2"  formControlName="photo" (change)="readUrl($event,fileUpload2,photo)">
+                           <img #photo name="photo" [src]="photoUrl2" [ngClass]="{photoLayer: visibility}" ngDefaultControl>
+                           <!-- <label class="remove-photo" (click)="removeFile(photo,fileUpload2)">❌</label> -->
+             </div>
+         </div>
+         <div class="alert-wrapper">
+             <div class="alert alert-danger"
+                  *ngIf="registrationForm.controls['photo'].invalid && registrationForm.controls['photo'].touched">
+                 cityError
+             </div>
+         </div>
+        </div>
+        <!---->
+        <div class="form-check" class="check" [ngClass]="{'hidden': stepOne}">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Присылать письма на имейл при принятии моей заявки на заказ\
+при выполнении моего заказа исполнителемt</label>
+        </div>
+        <div class="form-button-wrapper">
+            <button class="form-button" [ngClass]="{'hidden': stepOne}" (click)="previousStep()" type="button">Назад</button>
+          <button class="form-button" [ngClass]="{'hidden': stepOne}" (click)="registerUser()" [disabled]="registrationForm.invalid" type="submit">Зарегистрироваться</button>
+          <a [routerLink]="['/login']" [ngClass]="{'hidden': !stepOne}" class="auth-switch-link">У меня уже есть аккаунт</a>
+          <button class="form-button" [ngClass]="{'hidden': !stepOne}" [disabled]="registrationForm.controls['email'].invalid || registrationForm.controls['tel'].invalid ||  registrationForm.controls['categoryId'].invalid || registrationForm.controls['password'].invalid || ((catString == null || catString == '') && registrationForm.controls['categoryId'].touched)" (click)="nextStep()" type="button">Далее</button>
+          <a [routerLink]="['/entity-registration']" [ngClass]="{'hidden': !stepOne}" class="reg-ent-switch-link">Для юридических лиц</a>
+        </div>
+      </form>
+</section>

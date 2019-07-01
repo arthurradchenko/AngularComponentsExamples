@@ -1,0 +1,8 @@
+<div class="modal-header">
+    <br>
+    <label *ngIf="id">Вы точно хотите принять предложение?</label>
+</div>
+<div class="modal-footer">
+    <button  type="button" (click)="acceptRequest(id)" > Да </button>
+    <button  type="button" (click)="activeModal.close()" >Закрыть</button>
+</div>
